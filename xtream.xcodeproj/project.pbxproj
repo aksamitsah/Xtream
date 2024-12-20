@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D5A97752D162A7500CB28E3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6D5A97742D162A7500CB28E3 /* Lottie */; };
-		E8BCBB3CFDD81F7018F6CCFB /* Pods_xtream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A2FFD1DF3DE9FF9178DB67 /* Pods_xtream.framework */; };
+		6D5A98342D162D7500CB28E3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6D5A98332D162D7500CB28E3 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6D63AEA42D1408900051AAFE /* xtream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xtream.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3A2FFD1DF3DE9FF9178DB67 /* Pods_xtream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xtream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -42,8 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8BCBB3CFDD81F7018F6CCFB /* Pods_xtream.framework in Frameworks */,
-				6D5A97752D162A7500CB28E3 /* Lottie in Frameworks */,
+				6D5A98342D162D7500CB28E3 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,7 +52,6 @@
 			children = (
 				6D63AEA62D1408900051AAFE /* xtream */,
 				6D63AEA52D1408900051AAFE /* Products */,
-				D434D3576F99DD5F0472AD0E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,14 +63,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D434D3576F99DD5F0472AD0E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E3A2FFD1DF3DE9FF9178DB67 /* Pods_xtream.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,11 +70,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D63AEB72D1408930051AAFE /* Build configuration list for PBXNativeTarget "xtream" */;
 			buildPhases = (
-				3B9215B53FCE94E8997A4424 /* [CP] Check Pods Manifest.lock */,
 				6D63AEA02D1408900051AAFE /* Sources */,
 				6D63AEA12D1408900051AAFE /* Frameworks */,
 				6D63AEA22D1408900051AAFE /* Resources */,
-				91ECB502E77CF64470E332A7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,7 +111,7 @@
 			mainGroup = 6D63AE9B2D1408900051AAFE;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				6D5A97732D162A7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				6D5A98322D162D7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6D63AEA52D1408900051AAFE /* Products */;
@@ -147,48 +133,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		3B9215B53FCE94E8997A4424 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-xtream-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		91ECB502E77CF64470E332A7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-xtream/Pods-xtream-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-xtream/Pods-xtream-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-xtream/Pods-xtream-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		6D63AEA02D1408900051AAFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -205,6 +149,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UAWGD7BR57;
@@ -214,7 +159,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Xtream Play";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -236,6 +181,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UAWGD7BR57;
@@ -245,7 +191,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Xtream Play";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -405,7 +351,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6D5A97732D162A7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+		6D5A98322D162D7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -416,9 +362,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6D5A97742D162A7500CB28E3 /* Lottie */ = {
+		6D5A98332D162D7500CB28E3 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6D5A97732D162A7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			package = 6D5A98322D162D7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
