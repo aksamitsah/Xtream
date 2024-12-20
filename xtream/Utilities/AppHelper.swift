@@ -54,15 +54,25 @@ final class AppHelper {
         _ = NSAttributedString(string: alertTitle, attributes: [
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18), //your font here
             NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-
+        ])
+        
         _ = NSAttributedString(string: message, attributes: [
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), //your font here
             NSAttributedString.Key.foregroundColor : UIColor.black
-            ])
-
+        ])
+        
         let alertView = UIAlertController(title: alertTitle, message: message, preferredStyle: .actionSheet)
         alertView.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil))
+        
+        // Handle iPad-specific configuration for .actionSheet
+        if let popoverController = alertView.popoverPresentationController {
+            popoverController.sourceView = vc?.view // Anchor to the main view
+            popoverController.sourceRect = CGRect(x: (vc?.view.bounds.midX ?? 0),
+                                                  y: (vc?.view.bounds.midY ?? 0),
+                                                  width: 1,
+                                                  height: 1) // Centered on the screen
+            popoverController.permittedArrowDirections = [] // No arrow
+        }
         
         vc?.present(alertView, animated: true)
     }
