@@ -3,8 +3,8 @@
 # [Xtream Play](https://www.amit-sah.com.np/) | Ticktok Clone 
 
 <div align='center'>
-  <a href="https://testflight.apple.com/join/9wovaSD1">
-  <img src="https://github.com/aksamitsah/Goodspace/assets/42860041/38081f39-2f46-4533-abec-07f1097af9a4.png" width="120"></a>
+  <a href="https://testflight.apple.com/join/NTZMjCtG">
+  <img src="https://github.com/user-attachments/assets/72eef30b-0a25-4c14-a27e-d66ba96a256c" width="120"></a>
   <p>Click to open OR Scan QR to Download App</p>
 </div>
 
@@ -34,7 +34,7 @@
 
 ## 🔗 APP Link:
 
-- TestFlight Public Link : https://testflight.apple.com/join/9wovaSD1
+- TestFlight Public Link : https://testflight.apple.com/join/NTZMjCtG
 - App Store Live: Na
 
 ## Project Desctiptions: 
