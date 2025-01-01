@@ -43,7 +43,9 @@
 - Swift_v5.8 with UIKit
 - Min Support iOS_15+
 - Compatable: IPhone, Ipad, Mac(Design for Ipad) & Vision Pro(Design for Ipad)
-- SPM for Lottie
+- SPM
+  - Lottie (Animation)
+  - SwiftLint (Best Practice)
 - API from Resource/JSON `OR`
   - https://d3mdik3sbdezfx.cloudfront.net/apis/video.json
   - https://d3mdik3sbdezfx.cloudfront.net/apis/comment.json
@@ -74,6 +76,8 @@ https://github.com/user-attachments/assets/29733aaa-339c-417a-980a-16b7fb317c65
  
 https://github.com/user-attachments/assets/be3dfa2d-6d0f-450a-bd2f-237680fb4e88
 
+ ## Linting and Best Practices
+ - This repository follows strict linting rules and coding standards to ensure clean, maintainable, high-quality code. and automated workflow 
 
  ## Project File Structure & Build Status: Xcode Cloud
  - Build 6, v.1.0.0(1)
