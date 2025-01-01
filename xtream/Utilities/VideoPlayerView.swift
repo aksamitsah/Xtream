@@ -48,7 +48,7 @@ class VideoPlayerView: UIView {
         avPlayerLayer.frame = self.layer.bounds
     }
     
-    func setupView(){
+    func setupView() {
         let operationQueue = OperationQueue()
         operationQueue.name = "tech.dreamcoder.URLSeesion"
         operationQueue.maxConcurrentOperationCount = 1
@@ -61,7 +61,7 @@ class VideoPlayerView: UIView {
         
     }
     
-    func configure(videoURL: URL?){
+    func configure(videoURL: URL?) {
         self.layer.addSublayer(self.avPlayerLayer)
         guard let videoURL else {
             Log.error("URL Error from Tableview Cell")
@@ -88,7 +88,7 @@ class VideoPlayerView: UIView {
     }
     
     // Clear all remote or local request
-    func cancelAllLoadingRequest(){
+    func cancelAllLoadingRequest() {
         removeObserver()
         
         videoURL = nil
@@ -111,7 +111,7 @@ class VideoPlayerView: UIView {
         }
     }
     
-    func replay(){
+    func replay() {
         self.queuePlayer?.seek(to: .zero)
         play()
     }
@@ -120,7 +120,7 @@ class VideoPlayerView: UIView {
         self.queuePlayer?.play()
     }
     
-    func pause(){
+    func pause() {
         self.queuePlayer?.pause()
     }
 }
@@ -158,7 +158,11 @@ extension VideoPlayerView {
 // MARK: - URL Session Delegate
 extension VideoPlayerView: URLSessionTaskDelegate, URLSessionDataDelegate {
     // Get Responses From URL Request
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+    func urlSession(
+        _ session: URLSession,
+        dataTask: URLSessionDataTask,
+        didReceive response: URLResponse,
+        completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         self.infoResponse = response
         self.processLoadingRequest()
         completionHandler(.allow)
@@ -170,7 +174,7 @@ extension VideoPlayerView: URLSessionTaskDelegate, URLSessionDataDelegate {
         self.processLoadingRequest()
     }
     
-    private func processLoadingRequest(){
+    private func processLoadingRequest() {
         var finishedRequests = Set<AVAssetResourceLoadingRequest>()
         self.loadingRequests.forEach {
             var request = $0
@@ -212,19 +216,28 @@ extension VideoPlayerView: URLSessionTaskDelegate, URLSessionDataDelegate {
         let requestUnreadDataLength = requestRequestedOffset + requestRequestedLength - requestCurrentOffset
         let respondDataLength = min(requestUnreadDataLength, downloadedUnreadDataLength)
 
-        dataRequest.respond(with: downloadedData.subdata(in: Range(NSMakeRange(Int(requestCurrentOffset), Int(respondDataLength)))!))
+        dataRequest.respond(
+            with: downloadedData.subdata(
+                in: Int(requestCurrentOffset)..<Int(requestCurrentOffset + respondDataLength)
+            )
+        )
 
         let requestEndOffset = requestRequestedOffset + requestRequestedLength
-
         return requestCurrentOffset >= requestEndOffset
     }
 }
 
 // MARK: - AVAssetResourceLoader Delegate
 extension VideoPlayerView: AVAssetResourceLoaderDelegate {
-    func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
+    
+    func resourceLoader(
+        _ resourceLoader: AVAssetResourceLoader,
+        shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest
+    ) -> Bool {
         if task == nil, let url = originalURL {
-            let request = URLRequest.init(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60)
+            let request = URLRequest.init(
+                url: url, cachePolicy: .reloadIgnoringLocalCacheData,
+                timeoutInterval: 60)
             task = session?.dataTask(with: request)
             task?.resume()
         }
@@ -232,7 +245,10 @@ extension VideoPlayerView: AVAssetResourceLoaderDelegate {
         return true
     }
 
-    func resourceLoader(_ resourceLoader: AVAssetResourceLoader, didCancel loadingRequest: AVAssetResourceLoadingRequest) {
+    func resourceLoader(
+        _ resourceLoader: AVAssetResourceLoader,
+        didCancel loadingRequest: AVAssetResourceLoadingRequest
+    ) {
         if let index = self.loadingRequests.firstIndex(of: loadingRequest) {
             self.loadingRequests.remove(at: index)
         }

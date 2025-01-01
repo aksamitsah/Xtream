@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum XtreamAPI {
     case feed
     case comment(feedID: Int)
@@ -15,7 +14,7 @@ enum XtreamAPI {
 
 extension XtreamAPI: API {
     
-    var scheme: HTTPScheme{
+    var scheme: HTTPScheme {
         return .https
     }
     
@@ -23,7 +22,7 @@ extension XtreamAPI: API {
         return "d3mdik3sbdezfx.cloudfront.net"
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         
         let header = [
             "Authorization": "",
@@ -37,16 +36,15 @@ extension XtreamAPI: API {
         }
         
     }
-
     
-    var method: HTTPMethod{
+    var method: HTTPMethod {
         switch self {
         case .feed, .comment:
             return .get
         }
     }
     
-    var path: String{
+    var path: String {
         switch self {
         case .feed:
             return "/apis/video.json"
@@ -57,7 +55,7 @@ extension XtreamAPI: API {
     
     var body: Data? {
         
-        let data = [String : String]()
+        let data = [String: String]()
         
         switch self {
         case .feed, .comment: break

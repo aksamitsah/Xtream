@@ -13,7 +13,6 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var msgLbl: UILabel!
     
-    
     var data: CommentModel? {
         didSet {
             guard let data else { return }
@@ -37,14 +36,6 @@ class CommentCell: UITableViewCell {
         guard let data else { return }
         ImageCacheManager.shared.cancelLoad(for: data.picURL)
         imageview.image = nil
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
     
 }

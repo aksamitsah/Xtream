@@ -50,7 +50,9 @@ final class HomeViewModel: NSObject {
             return
         }
         
-        APIManager.request(endpoint: XtreamAPI.comment(feedID: 0)) { [weak self] (result: Result<[CommentModel], HandleError>) in
+        APIManager.request(
+            endpoint: XtreamAPI.comment(feedID: 0)
+        ) { [weak self] (result: Result<[CommentModel], HandleError>) in
             switch result {
             case .success(let data):
                 self?.comments = data

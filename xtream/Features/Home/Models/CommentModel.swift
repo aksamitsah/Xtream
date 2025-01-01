@@ -5,7 +5,7 @@
 //  Created by Amit Shah on 20/12/24.
 //
 
-struct CommentModel: Codable{
+struct CommentModel: Codable {
     let id: Int
     let username: String
     let picURL: String
@@ -18,7 +18,7 @@ struct CommentModel: Codable{
         case comment
     }
     
-    init(id: Int, username: String, picURL: String, comment: String){
+    init(id: Int, username: String, picURL: String, comment: String) {
         self.id = id
         self.username = username
         self.picURL = picURL

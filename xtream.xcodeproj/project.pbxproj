@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D30DCD82D2578A7008B3EBA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 6D30DCD72D2578A4008B3EBA /* .swiftlint.yml */; };
 		6D5A98342D162D7500CB28E3 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6D5A98332D162D7500CB28E3 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D30DCD62D257870008B3EBA /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
+		6D30DCD72D2578A4008B3EBA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		6D63AEA42D1408900051AAFE /* xtream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xtream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -47,9 +50,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D30DCD52D257862008B3EBA /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				6D30DCD62D257870008B3EBA /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
+			sourceTree = "<group>";
+		};
 		6D63AE9B2D1408900051AAFE = {
 			isa = PBXGroup;
 			children = (
+				6D30DCD72D2578A4008B3EBA /* .swiftlint.yml */,
+				6D30DCD52D257862008B3EBA /* ci_scripts */,
 				6D63AEA62D1408900051AAFE /* xtream */,
 				6D63AEA52D1408900051AAFE /* Products */,
 			);
@@ -77,6 +90,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D30DCD42D257696008B3EBA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				6D63AEA62D1408900051AAFE /* xtream */,
@@ -112,6 +126,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				6D5A98322D162D7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				6D30DCD22D2575BB008B3EBA /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6D63AEA52D1408900051AAFE /* Products */;
@@ -128,6 +143,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D30DCD82D2578A7008B3EBA /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +158,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6D30DCD42D257696008B3EBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 6D30DCD32D257696008B3EBA /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		6D63AEB82D1408930051AAFE /* Debug */ = {
@@ -361,6 +384,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6D30DCD22D2575BB008B3EBA /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.1;
+			};
+		};
 		6D5A98322D162D7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -372,6 +403,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6D30DCD32D257696008B3EBA /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D30DCD22D2575BB008B3EBA /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
 		6D5A98332D162D7500CB28E3 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6D5A98322D162D7500CB28E3 /* XCRemoteSwiftPackageReference "lottie-ios" */;

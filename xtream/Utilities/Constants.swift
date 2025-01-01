@@ -6,11 +6,9 @@
 //
 
 struct CONSTRAINT {
-    
-    struct userInfo {
+    struct UserInfo {
         let id: Int = 1001
         let username: String = "aksamitsah"
         let picURL: String = "https://amit-sah.com.np/img/about.jpg"
     }
-    
 }

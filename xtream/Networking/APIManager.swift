@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-typealias Handler<T> = (Result<T,HandleError>) -> Void
+typealias Handler<T> = (Result<T, HandleError>) -> Void
 
 enum HTTPMethod: String {
     case delete = "DELETE"
@@ -23,20 +22,18 @@ enum HTTPScheme: String {
     case https
 }
 
-
-final class APIManager {
+class APIManager {
     
-    private class func buildURL(endpoint: API) -> URLComponents {
+    class func buildURL(endpoint: API) -> URLComponents {
         var components = URLComponents()
         components.scheme = endpoint.scheme.rawValue
         components.host = endpoint.baseURL
         components.path = endpoint.path
-        if let ds = endpoint.parameters, !ds.isEmpty{
-            components.queryItems = ds
+        if let data = endpoint.parameters, !data.isEmpty {
+            components.queryItems = data
         }
         return components
     }
-    
     
     class func request<T: Decodable>(endpoint: API, completion: @escaping Handler<T>) {
         
@@ -51,13 +48,13 @@ final class APIManager {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endpoint.method.rawValue
         
-        if let rowHeader = endpoint.headers, !rowHeader.isEmpty{
-            for (key, value) in rowHeader{
+        if let rowHeader = endpoint.headers, !rowHeader.isEmpty {
+            for (key, value) in rowHeader {
                 urlRequest.addValue(value, forHTTPHeaderField: key)
             }
         }
         
-        if endpoint.body != nil{
+        if endpoint.body != nil {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.httpBody = endpoint.body
         }
@@ -74,14 +71,14 @@ final class APIManager {
             guard let response = response as? HTTPURLResponse,
                   200 ... 299 ~= response.statusCode else {
                 
-                do{
+                do {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                        let sendback = json["message"] as? String {
                         completion(.failure(.custom(sendback)))
-                    }else{
+                    } else {
                         completion(.failure(.invalidResponse))
                     }
-                }catch{
+                } catch {
                     completion(.failure(.invalidResponse))
                 }
                 Log.error("Failed Response Code")
@@ -89,11 +86,11 @@ final class APIManager {
                 
             }
             
-            do{
+            do {
                 let response = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(response))
                 Log.info("Sucessful featched")
-            }catch{
+            } catch {
                 completion(.failure(.message(error)))
                 Log.error(error)
             }

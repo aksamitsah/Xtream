@@ -36,13 +36,13 @@ class HomeFeedCell: UICollectionViewCell, ReusableView {
     @IBOutlet weak var bottomSheetConst: NSLayoutConstraint!
     
     @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var pauseImageView: UIImageView!{
+    @IBOutlet weak var pauseImageView: UIImageView! {
         didSet {
             pauseImageView.alpha = 0
         }
     }
     
-    var error: ((HandleError)->Void)?
+    var error: ((HandleError) -> Void)?
     
     private var comments: [CommentModel] = []
     var backupComments: [CommentModel] = []
@@ -84,10 +84,6 @@ class HomeFeedCell: UICollectionViewCell, ReusableView {
         commentTV.reloadData()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -125,7 +121,7 @@ class HomeFeedCell: UICollectionViewCell, ReusableView {
         initilizeAction()
     }
     
-    func initilizeAction(){
+    func initilizeAction() {
         
         roseStackView.addTapGesture { [weak self] in
             self?.autoLikes()
@@ -214,7 +210,7 @@ class HomeFeedCell: UICollectionViewCell, ReusableView {
         }
     }
     
-    func replay(){
+    func replay() {
         if !isPlaying {
             playerView.replay()
             play()
@@ -231,7 +227,7 @@ class HomeFeedCell: UICollectionViewCell, ReusableView {
         }
     }
     
-    func pause(){
+    func pause() {
         if isPlaying {
             playerView.pause()
             isPlaying = false
@@ -240,19 +236,24 @@ class HomeFeedCell: UICollectionViewCell, ReusableView {
     }
 }
 
-
 extension HomeFeedCell: UITextFieldDelegate {
     
     // Dismiss the keyboard when the return key is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        //send comment if not empty if empty than close Keyboard UI
+        // send comment if not empty if empty than close Keyboard UI
         if let text = textField.text, !text.isEmpty {
             
             textField.text = ""
             
-            let user = CONSTRAINT.userInfo()
-            comments.insert(CommentModel(id: user.id, username: user.username, picURL: user.picURL, comment: text), at: 0)
+            let user = CONSTRAINT.UserInfo()
+            comments.insert(
+                CommentModel(
+                    id: user.id,
+                    username: user.username,
+                    picURL: user.picURL,
+                    comment: text
+                ), at: 0)
             commentTV.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
             
             return false
@@ -267,11 +268,20 @@ extension HomeFeedCell: UITextFieldDelegate {
     // Listen for keyboard show and hide notifications
     func setupKeyboardNotifications() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
         
     }
-
 
     @objc func keyboardWillShow(notification: Notification) {
         
@@ -290,14 +300,20 @@ extension HomeFeedCell: UITextFieldDelegate {
     
 }
 
-extension HomeFeedCell:  UITableViewDataSource, UITableViewDelegate {
+extension HomeFeedCell: UITableViewDataSource, UITableViewDelegate {
     
     func startAddingComments() {
         
         timer?.invalidate()
         timer = nil
         
-        timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(addComment), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(
+            timeInterval: 2.0,
+            target: self,
+            selector: #selector(addComment),
+            userInfo: nil,
+            repeats: true
+        )
     }
     
     @objc func addComment() {
@@ -322,7 +338,6 @@ extension HomeFeedCell:  UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    
     func setupTableView() {
         
         commentTV.registerFromXib(name: CommentCell.reuseIdentifier)
@@ -336,7 +351,6 @@ extension HomeFeedCell:  UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return comments.count
@@ -345,14 +359,19 @@ extension HomeFeedCell:  UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: CommentCell.reuseIdentifier, for: indexPath) as! CommentCell
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CommentCell.reuseIdentifier,
+            for: indexPath
+        ) as? CommentCell else {
+            return UITableViewCell()
+        }
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
         cell.data = comments[indexPath.row]
         return cell
         
     }
     
-    //Scroll down or up top last element 40% opacity
+    // Scroll down or up top last element 40% opacity
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let visibleCells = commentTV.visibleCells as? [CommentCell] else { return }
 

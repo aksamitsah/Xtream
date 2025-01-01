@@ -5,9 +5,7 @@
 //  Created by Amit Shah on 20/12/24.
 //
 
-
 import UIKit
-
 
 class CustomUILabel: UILabel {
     

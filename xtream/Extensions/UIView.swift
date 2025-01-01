@@ -9,9 +9,9 @@ import UIKit
 
 extension UIView {
     
-    func addTapGesture(action : @escaping ()->Void){
+    func addTapGesture(action: @escaping () -> Void) {
         
-        let tap = MyTapGestureRecognizer(target: self , action: #selector(self.handleTaps(_:)))
+        let tap = MyTapGestureRecognizer(target: self, action: #selector(self.handleTaps(_:)))
         tap.action = action
         tap.numberOfTapsRequired = 1
         self.addGestureRecognizer(tap)
@@ -26,5 +26,5 @@ extension UIView {
 }
 
 class MyTapGestureRecognizer: UITapGestureRecognizer {
-    var action : (()->Void)? = nil
+    var action: (() -> Void)?
 }

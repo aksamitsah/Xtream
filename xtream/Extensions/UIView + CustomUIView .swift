@@ -7,7 +7,6 @@
 
 import UIKit.UIView
 
-
 class CustomUIView: UIView {
     
     // Round corner radius

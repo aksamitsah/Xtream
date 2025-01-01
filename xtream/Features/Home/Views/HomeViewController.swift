@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     private let viewModel = HomeViewModel()
     
     @objc dynamic var currentIndex = 0
-    private var oldAndNewIndices = (0,0)
+    private var oldAndNewIndices = (0, 0)
     private var isFirstTimeLoad: Bool = true
     
     private var mainCv: UICollectionView!
@@ -24,7 +24,6 @@ class HomeViewController: UIViewController {
         AppHelper.shared.showProgressIndicator(view: self.view)
         viewModel.getData()
     }
-    
     
     private func bindViewModel() {
         // Observe feed updates
@@ -44,14 +43,18 @@ class HomeViewController: UIViewController {
         viewModel.onErrorOccurred = { [weak self] error in
             DispatchQueue.main.async {
                 AppHelper.shared.hideProgressIndicator(view: self?.view)
-                AppHelper.shared.showAlert(title: "Error", message: error, vc: self)
+                AppHelper.shared.showAlert(
+                    title: "Error",
+                    message: error,
+                    viewController: self
+                )
             }
         }
     }
     
 }
 
-//Setup Functions
+// Setup Functions
 extension HomeViewController {
     
     private func setupCollectionView() {
@@ -83,33 +86,45 @@ extension HomeViewController {
     
 }
 
-
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.feeds.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //URL(string: "https://d3mdik3sbdezfx.cloudfront.net/00\(indexPath.row+1).MP4"
-        let cell : HomeFeedCell = collectionView.dequeueReusableCell(for: indexPath)
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        let cell: HomeFeedCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.data = viewModel.feeds[indexPath.row]
         cell.backupComments = viewModel.comments
         cell.error = { (error) in
             Log.error(error)
             DispatchQueue.main.async {
-                AppHelper.shared.showAlert(title: "Something went wrong", message: error.localizedDescription, vc: self)
+                AppHelper.shared.showAlert(
+                    title: "Something went wrong",
+                    message: error.localizedDescription,
+                    viewController: self
+                )
             }
         }
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         return collectionView.frame.size
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
         if let cell = cell as? HomeFeedCell {
             oldAndNewIndices.1 = indexPath.row
             currentIndex = indexPath.row
@@ -120,10 +135,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 cell.replay()
             }
         }
-        
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didEndDisplaying cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
         if let cell = cell as? HomeFeedCell {
             cell.pause()
         }

@@ -14,7 +14,10 @@ class ImageCacheManager: NSObject {
     private let urlSession: URLSession
     private var runningTasks = [String: URLSessionTask]()
     private var pendingRequests = [String: (UIImage?, Error?) -> Void]() // Queue for pending requests
-    private let queue = DispatchQueue(label: "com.dreamcoder.imagecache", qos: .userInitiated) // Serial queue for thread safety
+    private let queue = DispatchQueue(
+        label: "com.dreamcoder.imagecache",
+        qos: .userInitiated
+    ) // Serial queue for thread safety
     private let memoryLimit: Int = 1024 * 1024 * 50 // 50MB
     private let purgeThreshold: Int = 1024 * 1024 * 10 // 10MB to clear on purge
     private var currentMemoryUsage: Int = 0
@@ -30,7 +33,11 @@ class ImageCacheManager: NSObject {
         
     }
     
-    func loadImage(from urlString: String, completion: @escaping (UIImage?, Error?) -> Void) {
+    func loadImage(
+        from urlString: String,
+        completion: @escaping (UIImage?, Error?
+        ) -> Void
+    ) {
         
         queue.async { [weak self] in // Dispatch to serial queue
             guard let self = self else { return }
@@ -67,8 +74,11 @@ class ImageCacheManager: NSObject {
                         return
                     }
                     
-                    guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                        DispatchQueue.main.async { completion(nil, NSError(domain: "InvalidResponse", code: 0, userInfo: nil)) }
+                    guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode)
+                    else {
+                        DispatchQueue.main.async {
+                            completion( nil, NSError(domain: "InvalidResponse", code: 0, userInfo: nil))
+                        }
                         return
                     }
                     
@@ -78,14 +88,14 @@ class ImageCacheManager: NSObject {
                         self?.currentMemoryUsage += cost
                         DispatchQueue.main.async { completion(image, nil) }
                     } else {
-                        DispatchQueue.main.async { completion(nil, NSError(domain: "ImageDataError", code: 0, userInfo: nil)) }
+                        DispatchQueue.main.async {
+                            completion(nil, NSError(domain: "ImageDataError", code: 0, userInfo: nil))
+                        }
                     }
                 }
             }
-            
             self.runningTasks[urlString] = task
             task.resume()
-            
         }
     }
     
@@ -115,7 +125,10 @@ class ImageCacheManager: NSObject {
 extension ImageCacheManager: NSCacheDelegate {
     func cache(_ cache: NSCache<AnyObject, AnyObject>, willEvictObject obj: Any) {
         queue.async { [weak self] in
-            guard let self = self, let image = obj as? UIImage, let data = image.pngData() ?? image.jpegData(compressionQuality: 1.0) else { return }
+            guard let self = self,
+                  let image = obj as? UIImage,
+                  let data = image.pngData() ?? image.jpegData(compressionQuality: 1.0)
+            else { return }
             self.currentMemoryUsage -= data.count
         }
     }

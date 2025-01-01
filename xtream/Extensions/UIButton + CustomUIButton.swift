@@ -7,7 +7,6 @@
 
 import UIKit.UIButton
 
-
 class CustomUIButton: UIButton {
     
     // Round corner radius

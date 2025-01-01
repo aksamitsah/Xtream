@@ -44,7 +44,9 @@ class VideoCacheManager {
     // Download the video from the URL and cache it in the temporary directory
     func downloadVideo(from url: URL, completion: @escaping (URL) -> Void) {
         
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        let task = URLSession.shared.dataTask(
+            with: url
+        ) { [weak self] data, _, error in
             guard let self = self, let data = data, error == nil else {
                 Log.error("Error downloading video: \(error?.localizedDescription ?? "Unknown error")")
                 return
